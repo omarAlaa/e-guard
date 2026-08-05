@@ -3,12 +3,12 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-import { House, Cctv, Map } from 'lucide-react';
+import { LayoutDashboard, Cctv, Map } from 'lucide-react';
 
 // Map of links to display in the side navigation.
 // Depending on the size of the application, this would be stored in a database.
 const links = [
-    { name: 'Home', href: '/dashboard', icon: House },
+    { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
     {
         name: 'Cameras',
         href: '/dashboard/invoices',
@@ -28,7 +28,7 @@ export default function NavLinks() {
                     <Link
                         key={link.name}
                         href={link.href}
-                        className={clsx("flex h-[48px] grow items-center justify-center gap-2 rounded-md bg-gray-50 dark:bg-zinc-800 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3",
+                        className={clsx("flex h-12 grow items-center justify-center gap-2 rounded-md bg-gray-50 dark:bg-zinc-800 p-3 text-sm font-medium hover:bg-sky-100 hover:text-blue-600 md:flex-none md:justify-start md:p-2 md:px-3",
                             { 'bg-sky-100 text-blue-600': link.href === pathName }
                         )}
                     >
