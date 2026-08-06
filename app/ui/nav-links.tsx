@@ -5,13 +5,11 @@ import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
 import { LayoutDashboard, Cctv, Map } from 'lucide-react';
 
-// Map of links to display in the side navigation.
-// Depending on the size of the application, this would be stored in a database.
 const links = [
     { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
     {
         name: 'Cameras',
-        href: '/dashboard/invoices',
+        href: '/dashboard/cameras',
         icon: Cctv,
     },
     { name: 'Map', href: '/dashboard/customers', icon: Map },

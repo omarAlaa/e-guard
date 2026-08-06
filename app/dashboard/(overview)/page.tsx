@@ -1,8 +1,8 @@
-import AgeGroupsCard from "../ui/age-groups-card";
-import AlertsTable from "../ui/alerts-table";
-import GenderPieChart from "../ui/gender-pie-chart";
-import PeopleVehicleLineChart from "../ui/people-vehicles-lineChart";
-import StatsCards from "../ui/stats-cards";
+import AgeGroupsCard from "@/app//ui/age-groups-card";
+import AlertsTable from "@/app//ui/alerts-table";
+import GenderPieChart from "@/app//ui/gender-pie-chart";
+import PeopleVehicleLineChart from "@/app/ui/people-vehicles-lineChart";
+import StatsCards from "@/app/ui/stats-cards";
 
 
 export default function Dashboard() {
