@@ -1,52 +1,21 @@
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
+import { fetchAlarmsFeed } from "@/lib/data"
 
-const invoices = [
-    {
-        invoice: "INV001",
-        paymentStatus: "Paid",
-        totalAmount: "$250.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV002",
-        paymentStatus: "Pending",
-        totalAmount: "$150.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV003",
-        paymentStatus: "Unpaid",
-        totalAmount: "$350.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV004",
-        paymentStatus: "Paid",
-        totalAmount: "$450.00",
-        paymentMethod: "Credit Card",
-    },
-    {
-        invoice: "INV005",
-        paymentStatus: "Paid",
-        totalAmount: "$550.00",
-        paymentMethod: "PayPal",
-    },
-    {
-        invoice: "INV006",
-        paymentStatus: "Pending",
-        totalAmount: "$200.00",
-        paymentMethod: "Bank Transfer",
-    },
-    {
-        invoice: "INV007",
-        paymentStatus: "Unpaid",
-        totalAmount: "$300.00",
-        paymentMethod: "Credit Card",
-    },
-]
+function formatTime(timestamp: string) {
+    if (!timestamp) return ""
+    const date = new Date(timestamp)
 
-export default function AlertsTable() {
+    return date.toLocaleTimeString("en-GB", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+    })
+}
+
+export default async function AlertsTable() {
+    const alarmsData = await fetchAlarmsFeed()
+
     return (
         <Card>
             <CardHeader className="pb-3">
@@ -61,16 +30,18 @@ export default function AlertsTable() {
                             <TableHead>Time</TableHead>
                             <TableHead>Camera</TableHead>
                             <TableHead>Type</TableHead>
+                            <TableHead>Confidence</TableHead>
                             <TableHead>Status</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
-                        {invoices.slice(0, 3).map((invoice) => (
-                            <TableRow key={invoice.invoice}>
-                                <TableCell>{invoice.invoice}</TableCell>
-                                <TableCell>{invoice.paymentStatus}</TableCell>
-                                <TableCell>{invoice.paymentMethod}</TableCell>
-                                <TableCell>{invoice.totalAmount}</TableCell>
+                        {alarmsData.map((alarm) => (
+                            <TableRow key={alarm.id}>
+                                <TableCell>{formatTime(alarm.detected_at)}</TableCell>
+                                <TableCell>{alarm.camera_name}</TableCell>
+                                <TableCell>{alarm.detection_type}</TableCell>
+                                <TableCell>{`${Math.round(alarm.confidence)}%`}</TableCell>
+                                <TableCell>{alarm.status}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

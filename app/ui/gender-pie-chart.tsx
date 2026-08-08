@@ -1,12 +1,11 @@
 'use client';
 
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
+import { GenderSplit } from '@/lib/definitions';
 import { Pie, PieChart, PieLabelRenderProps, PieSectorShapeProps, Sector, useActiveTooltipDataPoints, useIsTooltipActive, } from 'recharts';
 
-const data = [
-    { name: 'Group A', value: 400 },
-    { name: 'Group B', value: 300 },
-];
+type Props = {
+    data: GenderSplit;
+}
 
 const RADIAN = Math.PI / 180;
 const COLORS = ['#0088FE', '#fb64b6'];
@@ -48,38 +47,23 @@ const MyCustomPie = (props: PieSectorShapeProps) => {
     );
 };
 
-export default function GenderPieChart({ isAnimationActive = true }: { isAnimationActive?: boolean }) {
-    return (
-        <Card>
-            <CardHeader className="pb-3">
-                <CardDescription className="text-lg">
-                    Gender split
-                </CardDescription>
-            </CardHeader>
-            <CardContent className="flex flex-row items-center">
-                <PieChart style={{ width: '100%', maxWidth: '300px', maxHeight: '30vh', aspectRatio: 1 }} responsive>
-                    <Pie
-                        data={data}
-                        labelLine={false}
-                        label={renderCustomizedLabel}
-                        fill="#8884d8"
-                        dataKey="value"
-                        isAnimationActive={isAnimationActive}
-                        shape={MyCustomPie}
-                    />
-                </PieChart>
+export default function GenderPieChart({ data }: Props) {
+    const formattedData = [
+        { name: 'male', value: Number(data.male) },
+        { name: 'female', value: Number(data.female) }
+    ]
 
-                <div className='flex flex-col gap-1 text-lg'>
-                    <div className='flex flex-row items-center gap-2'>
-                        <div className='w-3 h-3 bg-[#0088FE] rounded' />
-                        Male — 57%
-                    </div>
-                    <div className='flex flex-row items-center gap-2'>
-                        <div className='w-3 h-3 bg-[#fb64b6] rounded' />
-                        Female — 43%
-                    </div>
-                </div>
-            </CardContent>
-        </Card>
-    );
+    return (
+        <PieChart style={{ width: '100%', maxWidth: '300px', maxHeight: '30vh', aspectRatio: 1 }} responsive>
+            <Pie
+                data={formattedData}
+                labelLine={false}
+                label={renderCustomizedLabel}
+                fill="#8884d8"
+                dataKey="value"
+                isAnimationActive
+                shape={MyCustomPie}
+            />
+        </PieChart>
+    )
 }

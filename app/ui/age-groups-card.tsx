@@ -1,15 +1,10 @@
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
+import { fetchTotalAgeDistribution } from "@/lib/data";
 
-const ageGroups = [
-    { label: "0-12", value: 8 },
-    { label: "13-19", value: 14 },
-    { label: "20-35", value: 39 },
-    { label: "36-55", value: 28 },
-    { label: "56+", value: 11 },
-];
+export default async function AgeGroupsCard() {
+    const ageDistributionData = await fetchTotalAgeDistribution()
 
-export default function AgeGroupsCard() {
     return (
         <Card>
             <CardHeader className="pb-3">
@@ -19,7 +14,7 @@ export default function AgeGroupsCard() {
             </CardHeader>
 
             <CardContent className="space-y-3">
-                {ageGroups.map((group) => (
+                {ageDistributionData.map((group) => (
                     <div
                         key={group.label}
                         className="grid grid-cols-[42px_1fr_38px] items-center gap-3"

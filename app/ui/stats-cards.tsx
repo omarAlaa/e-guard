@@ -1,7 +1,10 @@
 import { Card, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
+import { fetchTotalKPIs } from "@/lib/data"
 import { Car, Cctv, ShieldAlert, Users } from "lucide-react"
 
-export default function StatsCards() {
+export default async function StatsCards() {
+    const statsData = await fetchTotalKPIs()
+
     return (
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
             <Card>
@@ -10,7 +13,7 @@ export default function StatsCards() {
                         <Users />
                         <p>People today</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">4,812</CardTitle>
+                    <CardTitle className="text-2xl">{statsData.people_today}</CardTitle>
                 </CardHeader>
             </Card>
 
@@ -19,7 +22,7 @@ export default function StatsCards() {
                     <CardDescription className="text-lg">
                         <p>Male / female</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">4,812</CardTitle>
+                    <CardTitle className="text-2xl">{`${statsData.male_today} / ${statsData.female_today}`}</CardTitle>
                 </CardHeader>
             </Card>
 
@@ -29,7 +32,7 @@ export default function StatsCards() {
                         <Car />
                         <p>Vehicles today</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">4,812</CardTitle>
+                    <CardTitle className="text-2xl">{statsData.vehicles_today}</CardTitle>
                 </CardHeader>
             </Card>
 
@@ -39,7 +42,7 @@ export default function StatsCards() {
                         <Cctv />
                         <p>Cameras online</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">4,812</CardTitle>
+                    <CardTitle className="text-2xl">{`${statsData.cameras_online} / ${statsData.cameras_total}`}</CardTitle>
                 </CardHeader>
             </Card>
 
@@ -49,7 +52,7 @@ export default function StatsCards() {
                         <ShieldAlert />
                         <p>Critical alerts</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">4,812</CardTitle>
+                    <CardTitle className="text-2xl">{statsData.critical_alerts_open}</CardTitle>
                 </CardHeader>
             </Card>
         </div>
