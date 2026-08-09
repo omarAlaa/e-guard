@@ -1,7 +1,12 @@
 import { Card, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
+import { CameraStats } from "@/lib/definitions"
 import { ShieldAlert, TrendingUp, Users } from "lucide-react"
 
-export default function CameraStatsCards() {
+type Props = {
+    stats: CameraStats;
+}
+
+export default function CameraStatsCards({ stats }: Props) {
     return (
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
             <Card>
@@ -10,7 +15,7 @@ export default function CameraStatsCards() {
                         <Users />
                         <p>People now</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">4,812</CardTitle>
+                    <CardTitle className="text-2xl">{stats.people_now}</CardTitle>
                 </CardHeader>
             </Card>
 
@@ -19,7 +24,9 @@ export default function CameraStatsCards() {
                     <CardDescription className="text-lg">
                         <p>Male / female</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">4,812</CardTitle>
+                    <CardTitle className="text-2xl">
+                        {`${Math.round(Number(stats.male_pct))}% / ${Math.round(Number(stats.female_pct))}%`}
+                    </CardTitle>
                 </CardHeader>
             </Card>
 
@@ -29,7 +36,7 @@ export default function CameraStatsCards() {
                         <TrendingUp />
                         <p>Peak today</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">4,812</CardTitle>
+                    <CardTitle className="text-2xl">{stats.peak_today}</CardTitle>
                 </CardHeader>
             </Card>
 
@@ -39,7 +46,7 @@ export default function CameraStatsCards() {
                         <ShieldAlert />
                         <p>Alerts today</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">4,812</CardTitle>
+                    <CardTitle className="text-2xl">{stats.alerts_today}</CardTitle>
                 </CardHeader>
             </Card>
         </div>

@@ -3,8 +3,15 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { getTimeAgo } from "@/lib/utils";
 
-export default function CameraLiveFeed() {
+type Props = {
+    name: string;
+    status: string;
+    last_seen_at: string;
+}
+
+export default function CameraLiveFeed({ name, status, last_seen_at }: Props) {
     return (
         <Card className="p-6">
             <div className="mb-8 flex items-start justify-between">
@@ -20,10 +27,10 @@ export default function CameraLiveFeed() {
                     </Link>
 
                     <div>
-                        <h2 className="text-3xl font-bold">Main lobby</h2>
+                        <h2 className="text-3xl font-bold">{name}</h2>
 
                         <p className="text-sm text-zinc-400">
-                            Camera ID CAM-014 • uptime 14d 6h
+                            {`Uptime ${getTimeAgo(last_seen_at)}`}
                         </p>
                     </div>
                 </div>
@@ -32,7 +39,7 @@ export default function CameraLiveFeed() {
                     <span className="h-2.5 w-2.5 rounded-full bg-green-500" />
 
                     <span className="text-sm font-medium text-green-500">
-                        Online
+                        {status}
                     </span>
                 </div>
             </div>

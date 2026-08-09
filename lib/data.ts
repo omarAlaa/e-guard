@@ -1,5 +1,5 @@
 import postgres from 'postgres';
-import { AlarmsFeed, GenderSplit, HourlyTraffic, TotalAgeDistribution, TotalKPIs } from './definitions';
+import { AlarmsFeed, CameraAlarm, CamerasOverview, CameraStats, GenderSplit, HourlyTraffic, TotalAgeDistribution, TotalKPIs } from './definitions';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -44,7 +44,13 @@ export async function fetchHourlyTraffic() {
 
 export async function fetchGenderSplit() {
     try {
-        const data = await sql<GenderSplit[]>`SELECT * FROM v_gender_split_24h`;
+        const data = await sql<GenderSplit[]>`
+        SELECT
+          male,
+          female,
+          male_pct,
+          female_pct 
+        FROM v_gender_split_24h`;
 
         return data[0];
     } catch (error) {
@@ -61,5 +67,47 @@ export async function fetchAlarmsFeed() {
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to fetch alarms data.');
+    }
+}
+
+export async function fetchCamerasOverview() {
+    try {
+        const data = await sql<CamerasOverview[]>`SELECT * FROM v_cameras_overview`;
+
+        return data;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch cameras data.');
+    }
+}
+
+export async function fetchCameraStats(id: string) {
+    try {
+        const cameraStats = await sql<CameraStats[]>`SELECT * FROM v_camera_stats_24h WHERE camera_id = ${id}`;
+
+        return cameraStats[0];
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch camera stats.');
+    }
+}
+
+export async function fetchCameraAlarms(id: string) {
+    try {
+        const cameraAlarms = await sql<CameraAlarm[]>`
+        SELECT
+          id,
+          detected_at,
+          detection_type,
+          confidence,
+          status
+        FROM fire_weapon_detections
+        WHERE camera_id = ${id}
+          `;
+
+        return cameraAlarms;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch camera alarms.');
     }
 }

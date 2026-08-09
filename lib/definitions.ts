@@ -33,7 +33,6 @@ export type HourlyTraffic = {
 export type GenderSplit = {
     male: number;
     female: number;
-    total: number;
     male_pct: number;
     female_pct: number;
 }
@@ -48,4 +47,37 @@ export type AlarmsFeed = {
     camera_id: string;
     camera_name: string;
     camera_location: string;
+}
+
+export type CamerasOverview = {
+    id: string;
+    name: string;
+    location: string;
+    latitude: number;
+    longitude: number;
+    status: string;
+    last_seen_at: string;
+    latest_people_count: number;
+    latest_vehicle_count: number;
+}
+
+export type CameraStats = {
+    camera_id: string;
+    name: string;
+    location: string;
+    status: string;
+    last_seen_at: string;
+    people_now: string;
+    peak_today: string;
+    male_pct: string;
+    female_pct: string;
+    alerts_today: string;
+}
+
+export type CameraAlarm = {
+    id: string;
+    detected_at: string;
+    detection_type: string;
+    confidence: number;
+    status: string;
 }

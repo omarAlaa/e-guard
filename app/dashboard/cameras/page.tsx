@@ -1,5 +1,5 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CameraList } from "@/app/ui/cameras-list";
+import { Card, CardContent } from "@/components/ui/card";
+import CameraList from "@/app/ui/cameras-list";
 import { SiteMap } from "@/app/ui/site-map";
 
 export default function CamerasPage() {

@@ -2,36 +2,12 @@ import { ChevronRight, Funnel } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
+import { fetchCamerasOverview } from "@/lib/data";
+import { formatTime } from "@/lib/utils";
 
-const cameras = [
-    {
-        name: "Gate 1 — north entrance",
-        status: "online",
-        people: 18,
-    },
-    {
-        name: "Main lobby",
-        status: "online",
-        people: 42,
-    },
-    {
-        name: "Warehouse gate 3",
-        status: "offline",
-        time: "6 min ago",
-    },
-    {
-        name: "Parking lot B",
-        status: "online",
-        vehicles: 7,
-    },
-    {
-        name: "Loading dock",
-        status: "online",
-        people: 3,
-    },
-];
+export default async function CameraList() {
+    const camerasData = await fetchCamerasOverview()
 
-export function CameraList() {
     return (
         <div>
             <div className="flex gap-3">
@@ -50,11 +26,11 @@ export function CameraList() {
             </div>
 
             <div className="mt-6 space-y-5">
-                {cameras.map((camera) => (
+                {camerasData.map((camera) => (
                     <Link
                         key={camera.name}
                         className="p-2 group flex w-full items-center justify-between rounded-lg hover:bg-zinc-800"
-                        href={`cameras/${2}`}
+                        href={`cameras/${camera.id}`}
                     >
                         <div className="flex items-start gap-3">
                             <span
@@ -71,15 +47,11 @@ export function CameraList() {
 
                                 {camera.status === "online" ? (
                                     <p className="text-sm text-zinc-400">
-                                        {camera.people
-                                            ? `${camera.people} people`
-                                            : `${camera.vehicles} vehicles`}
-                                        {" • "}
-                                        online
+                                        {`${camera.latest_people_count} people • ${camera.latest_vehicle_count} vehicles • online`}
                                     </p>
                                 ) : (
                                     <p className="text-sm text-red-400">
-                                        offline • {camera.time}
+                                        offline • since {formatTime(camera.last_seen_at)}
                                     </p>
                                 )}
                             </div>
