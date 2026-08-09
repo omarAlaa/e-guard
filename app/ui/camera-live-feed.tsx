@@ -30,15 +30,15 @@ export default function CameraLiveFeed({ name, status, last_seen_at }: Props) {
                         <h2 className="text-3xl font-bold">{name}</h2>
 
                         <p className="text-sm text-zinc-400">
-                            {`Uptime ${getTimeAgo(last_seen_at)}`}
+                            {`${status === 'online' ? 'Uptime' : 'Down'} ${getTimeAgo(last_seen_at)}`}
                         </p>
                     </div>
                 </div>
 
                 <div className="flex items-center gap-2">
-                    <span className="h-2.5 w-2.5 rounded-full bg-green-500" />
+                    <span className={`h-2.5 w-2.5 rounded-full ${status === 'online' ? 'bg-green-500' : 'bg-red-500'}`} />
 
-                    <span className="text-sm font-medium text-green-500">
+                    <span className={`text-sm font-medium ${status === 'online' ? 'text-green-500' : 'text-red-500'}`}>
                         {status}
                     </span>
                 </div>

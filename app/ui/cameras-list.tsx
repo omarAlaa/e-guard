@@ -25,29 +25,29 @@ export default async function CameraList() {
                 </Button>
             </div>
 
-            <div className="mt-6 space-y-5">
+            <div className="mt-6 max-h-100 space-y-2 overflow-y-auto pr-2">
                 {camerasData.map((camera) => (
                     <Link
                         key={camera.id}
                         className="p-2 group flex w-full items-center justify-between rounded-lg hover:bg-zinc-800"
                         href={`cameras/${camera.id}`}
                     >
-                        <div className="flex items-start gap-3">
+                        <div className="flex items-center gap-3">
                             <span
-                                className={`mt-2 h-2.5 w-2.5 rounded-full ${camera.status === "online"
+                                className={`h-2.5 w-2.5 rounded-full ${camera.status === "online"
                                     ? "bg-green-500"
                                     : "bg-red-500"
                                     }`}
                             />
 
-                            <div className="text-left">
+                            <div className="text-left justify-center">
                                 <p className="font-semibold text-white">
                                     {camera.name}
                                 </p>
 
                                 {camera.status === "online" ? (
                                     <p className="text-sm text-zinc-400">
-                                        {`${camera.latest_people_count} people • ${camera.latest_vehicle_count} vehicles • online`}
+                                        {`${camera.latest_people_count} people / ${camera.latest_vehicle_count} vehicles • online`}
                                     </p>
                                 ) : (
                                     <p className="text-sm text-red-400">

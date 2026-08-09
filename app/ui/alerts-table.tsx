@@ -1,3 +1,4 @@
+import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card"
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "@/components/ui/table"
 import { fetchAlarmsFeed } from "@/lib/data"
@@ -14,14 +15,14 @@ export default async function AlertsTable() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-row items-center">
-                <Table>
+                <Table className="md:w-full md:table-fixed">
                     <TableHeader>
                         <TableRow>
-                            <TableHead>Time</TableHead>
-                            <TableHead>Camera</TableHead>
-                            <TableHead>Type</TableHead>
-                            <TableHead>Confidence</TableHead>
-                            <TableHead>Status</TableHead>
+                            <TableHead className="md:w-1/5">Time</TableHead>
+                            <TableHead className="md:w-1/5">Camera</TableHead>
+                            <TableHead className="md:w-1/5">Type</TableHead>
+                            <TableHead className="md:w-1/5">Confidence</TableHead>
+                            <TableHead className="md:w-1/5">Status</TableHead>
                         </TableRow>
                     </TableHeader>
                     <TableBody>
@@ -29,9 +30,14 @@ export default async function AlertsTable() {
                             <TableRow key={alarm.id}>
                                 <TableCell>{formatTime(alarm.detected_at)}</TableCell>
                                 <TableCell>{alarm.camera_name}</TableCell>
-                                <TableCell>{alarm.detection_type}</TableCell>
+                                <TableCell>
+                                    {alarm.detection_type === 'fire' ?
+                                        <Badge variant="destructive">Fire</Badge>
+                                        :
+                                        <Badge className="bg-yellow-50 text-yellow-700 dark:bg-yellow-950 dark:text-yellow-500">Weapon</Badge>}
+                                </TableCell>
                                 <TableCell>{`${Math.round(alarm.confidence)}%`}</TableCell>
-                                <TableCell>{alarm.status}</TableCell>
+                                <TableCell className={alarm.status === 'unreviewed' ? "text-destructive" : ''}>{alarm.status}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
