@@ -1,10 +1,10 @@
 'use client';
 
-import { GenderSplit } from '@/lib/definitions';
 import { Pie, PieChart, PieLabelRenderProps, PieSectorShapeProps, Sector, useActiveTooltipDataPoints, useIsTooltipActive, } from 'recharts';
 
 type Props = {
-    data: GenderSplit;
+    male: number;
+    female: number;
 }
 
 const RADIAN = Math.PI / 180;
@@ -47,10 +47,10 @@ const MyCustomPie = (props: PieSectorShapeProps) => {
     );
 };
 
-export default function GenderPieChart({ data }: Props) {
+export default function GenderPieChart({ male, female }: Props) {
     const formattedData = [
-        { name: 'male', value: Number(data.male) },
-        { name: 'female', value: Number(data.female) }
+        { name: 'male', value: Number(male) },
+        { name: 'female', value: Number(female) }
     ]
 
     return (

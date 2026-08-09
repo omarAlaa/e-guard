@@ -28,7 +28,7 @@ export default async function CameraList() {
             <div className="mt-6 space-y-5">
                 {camerasData.map((camera) => (
                     <Link
-                        key={camera.name}
+                        key={camera.id}
                         className="p-2 group flex w-full items-center justify-between rounded-lg hover:bg-zinc-800"
                         href={`cameras/${camera.id}`}
                     >

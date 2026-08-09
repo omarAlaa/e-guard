@@ -13,7 +13,7 @@ export default async function GenderCard() {
                 </CardDescription>
             </CardHeader>
             <CardContent className="flex flex-row items-center">
-                <GenderPieChart data={chartData} />
+                <GenderPieChart male={chartData.male} female={chartData.female} />
 
                 <div className='flex flex-col gap-1 text-lg'>
                     <div className='flex flex-row items-center gap-2'>

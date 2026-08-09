@@ -3,10 +3,14 @@ import { CameraStats } from "@/lib/definitions"
 import { ShieldAlert, TrendingUp, Users } from "lucide-react"
 
 type Props = {
-    stats: CameraStats;
+    people_now: string;
+    male_pct: string;
+    female_pct: string;
+    peak_today: string;
+    alerts_today: string;
 }
 
-export default function CameraStatsCards({ stats }: Props) {
+export default function CameraStatsCards({ people_now, male_pct, female_pct, peak_today, alerts_today }: Props) {
     return (
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
             <Card>
@@ -15,7 +19,7 @@ export default function CameraStatsCards({ stats }: Props) {
                         <Users />
                         <p>People now</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">{stats.people_now}</CardTitle>
+                    <CardTitle className="text-2xl">{people_now}</CardTitle>
                 </CardHeader>
             </Card>
 
@@ -25,7 +29,7 @@ export default function CameraStatsCards({ stats }: Props) {
                         <p>Male / female</p>
                     </CardDescription>
                     <CardTitle className="text-2xl">
-                        {`${Math.round(Number(stats.male_pct))}% / ${Math.round(Number(stats.female_pct))}%`}
+                        {`${Math.round(Number(male_pct))}% / ${Math.round(Number(female_pct))}%`}
                     </CardTitle>
                 </CardHeader>
             </Card>
@@ -36,7 +40,7 @@ export default function CameraStatsCards({ stats }: Props) {
                         <TrendingUp />
                         <p>Peak today</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">{stats.peak_today}</CardTitle>
+                    <CardTitle className="text-2xl">{peak_today}</CardTitle>
                 </CardHeader>
             </Card>
 
@@ -46,7 +50,7 @@ export default function CameraStatsCards({ stats }: Props) {
                         <ShieldAlert />
                         <p>Alerts today</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">{stats.alerts_today}</CardTitle>
+                    <CardTitle className="text-2xl">{alerts_today}</CardTitle>
                 </CardHeader>
             </Card>
         </div>

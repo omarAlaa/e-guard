@@ -61,7 +61,15 @@ export async function fetchGenderSplit() {
 
 export async function fetchAlarmsFeed() {
     try {
-        const data = await sql<AlarmsFeed[]>`SELECT * FROM v_fire_weapon_feed`;
+        const data = await sql<AlarmsFeed[]>`
+        SELECT
+          id,
+          detected_at,
+          camera_name,
+          detection_type,
+          confidence,
+          status 
+        FROM v_fire_weapon_feed`;
 
         return data;
     } catch (error) {
@@ -72,7 +80,15 @@ export async function fetchAlarmsFeed() {
 
 export async function fetchCamerasOverview() {
     try {
-        const data = await sql<CamerasOverview[]>`SELECT * FROM v_cameras_overview`;
+        const data = await sql<CamerasOverview[]>`
+        SELECT
+          id,
+          name,
+          status,
+          latest_people_count,
+          latest_vehicle_count,
+          last_seen_at
+        FROM v_cameras_overview`;
 
         return data;
     } catch (error) {
@@ -83,7 +99,19 @@ export async function fetchCamerasOverview() {
 
 export async function fetchCameraStats(id: string) {
     try {
-        const cameraStats = await sql<CameraStats[]>`SELECT * FROM v_camera_stats_24h WHERE camera_id = ${id}`;
+        const cameraStats = await sql<CameraStats[]>`
+        SELECT
+          name,
+          status,
+          last_seen_at,
+          people_now,
+          male_pct,
+          female_pct,
+          peak_today,
+          alerts_today
+        FROM v_camera_stats_24h
+        WHERE camera_id = ${id}
+         `;
 
         return cameraStats[0];
     } catch (error) {

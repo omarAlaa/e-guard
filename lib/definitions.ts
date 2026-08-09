@@ -40,31 +40,23 @@ export type GenderSplit = {
 export type AlarmsFeed = {
     id: string;
     detected_at: string;
+    camera_name: string;
     detection_type: string;
     confidence: number;
     status: string;
-    snapshot_url: string;
-    camera_id: string;
-    camera_name: string;
-    camera_location: string;
 }
 
 export type CamerasOverview = {
     id: string;
     name: string;
-    location: string;
-    latitude: number;
-    longitude: number;
     status: string;
-    last_seen_at: string;
     latest_people_count: number;
     latest_vehicle_count: number;
+    last_seen_at: string;
 }
 
 export type CameraStats = {
-    camera_id: string;
     name: string;
-    location: string;
     status: string;
     last_seen_at: string;
     people_now: string;

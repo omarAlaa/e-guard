@@ -1,4 +1,3 @@
-import AlertsTable from "@/app/ui/alerts-table";
 import CameraAlertsTable from "@/app/ui/camera-alerts-table";
 import CameraLiveFeed from "@/app/ui/camera-live-feed";
 import CameraStatsCards from "@/app/ui/camera-stats-cards";
@@ -22,7 +21,13 @@ export default async function CameraPage({ params }: { params: Promise<{ id: str
                 last_seen_at={cameraStats.last_seen_at}
             />
 
-            <CameraStatsCards stats={cameraStats} />
+            <CameraStatsCards
+                people_now={cameraStats.people_now}
+                male_pct={cameraStats.male_pct}
+                female_pct={cameraStats.female_pct}
+                peak_today={cameraStats.peak_today}
+                alerts_today={cameraStats.alerts_today}
+            />
 
             <CameraAlertsTable cameraAlarms={cameraAlarms} />
         </main>
