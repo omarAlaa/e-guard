@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-import { LayoutDashboard, Cctv, Map } from 'lucide-react';
+import { LayoutDashboard, Cctv, ScanFace } from 'lucide-react';
 
 const links = [
     { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
@@ -12,7 +12,7 @@ const links = [
         href: '/dashboard/cameras',
         icon: Cctv,
     },
-    { name: 'Map', href: '/dashboard/customers', icon: Map },
+    { name: 'People Recognition', href: '/dashboard/peopleRecognition', icon: ScanFace },
 ];
 
 export default function NavLinks() {

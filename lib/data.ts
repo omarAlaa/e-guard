@@ -1,5 +1,5 @@
 import postgres from 'postgres';
-import { AlarmsFeed, CameraAlarm, CamerasOverview, CameraStats, GenderSplit, HourlyTraffic, TotalAgeDistribution, TotalKPIs } from './definitions';
+import { AlarmsFeed, Camera, CameraAlarm, CamerasOverview, CameraStats, FaceMatchRecord, GenderSplit, HourlyTraffic, TotalAgeDistribution, TotalKPIs } from './definitions';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -137,5 +137,42 @@ export async function fetchCameraAlarms(id: string) {
     } catch (error) {
         console.error('Database Error:', error);
         throw new Error('Failed to fetch camera alarms.');
+    }
+}
+
+export async function fetchCameras() {
+    try {
+        const cameras = await sql<Camera[]>`
+        SELECT
+          id,
+          name
+        FROM cameras
+          `;
+
+        const camerasData = cameras.map(camera => ({ label: camera.name, value: camera.name }))
+        return camerasData;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch cameras.');
+    }
+}
+
+export async function fetchFaceRecFeed() {
+    try {
+        const faceRecFeed = await sql<FaceMatchRecord[]>`
+        SELECT
+          id,
+          matched_at,
+          person_name,
+          confidence,
+          is_watchlisted,
+          camera_name
+        FROM v_face_recognition_feed
+          `;
+
+        return faceRecFeed;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch face recognition data.');
     }
 }

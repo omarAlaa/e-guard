@@ -73,3 +73,17 @@ export type CameraAlarm = {
     confidence: number;
     status: string;
 }
+
+export type Camera = {
+    id: string;
+    name: string;
+}
+
+export type FaceMatchRecord = {
+    id: string;
+    matched_at: string;
+    person_name: string;
+    confidence: number;
+    is_watchlisted: boolean;
+    camera_name: string;
+}
