@@ -3,16 +3,14 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import clsx from 'clsx';
-import { LayoutDashboard, Cctv, ScanFace } from 'lucide-react';
+import { LayoutDashboard, Cctv, ScanFace, ScanSquare, ShieldAlert } from 'lucide-react';
 
 const links = [
     { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
-    {
-        name: 'Cameras',
-        href: '/dashboard/cameras',
-        icon: Cctv,
-    },
+    { name: 'Cameras', href: '/dashboard/cameras', icon: Cctv, },
     { name: 'People Recognition', href: '/dashboard/peopleRecognition', icon: ScanFace },
+    { name: 'Plate Recognition', href: '/dashboard/plateRecognition', icon: ScanSquare },
+    { name: 'Alerts', href: '/dashboard/alerts', icon: ShieldAlert },
 ];
 
 export default function NavLinks() {

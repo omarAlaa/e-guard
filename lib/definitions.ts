@@ -87,3 +87,23 @@ export type FaceMatchRecord = {
     is_watchlisted: boolean;
     camera_name: string;
 }
+
+export type PlateMatchRecord = {
+    id: string;
+    read_at: string;
+    plate_number: string;
+    vehicle_type: string;
+    vehicle_color: string;
+    camera_name: string;
+    status: string;
+}
+
+export type Event = {
+    id: string;
+    event_type: string;
+    severity: string;
+    message: string;
+    occurred_at: string;
+    status: string;
+    confidence: number;
+}

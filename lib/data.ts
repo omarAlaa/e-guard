@@ -1,5 +1,5 @@
 import postgres from 'postgres';
-import { AlarmsFeed, Camera, CameraAlarm, CamerasOverview, CameraStats, FaceMatchRecord, GenderSplit, HourlyTraffic, TotalAgeDistribution, TotalKPIs } from './definitions';
+import { AlarmsFeed, Camera, CameraAlarm, CamerasOverview, CameraStats, Event, FaceMatchRecord, GenderSplit, HourlyTraffic, PlateMatchRecord, TotalAgeDistribution, TotalKPIs } from './definitions';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -175,4 +175,31 @@ export async function fetchFaceRecFeed() {
         console.error('Database Error:', error);
         throw new Error('Failed to fetch face recognition data.');
     }
+}
+
+export async function fetchPlateRecFeed() {
+    try {
+        const plateRecFeed = await sql<PlateMatchRecord[]>`
+        SELECT
+          id,
+          read_at,
+          plate_number,
+          vehicle_type,
+          vehicle_color,
+          camera_name,
+          status
+        FROM v_plate_recognition_feed
+          `;
+
+        return plateRecFeed;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch plate recognition data.');
+    }
+}
+
+export async function fetchEventsList() {
+    const eventsList = await sql<Event[]>`SELECT * FROM v_alerts_feed`;
+
+    return eventsList;
 }
