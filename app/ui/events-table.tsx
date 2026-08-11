@@ -1,4 +1,4 @@
-import { AlertTriangle, CctvOff, Clock, Flame, } from "lucide-react";
+import { AlertTriangle, CctvOff, Clock, Flame, ScanFace, ScanSquare, } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,16 +22,20 @@ const eventStyles = {
 
 export default async function EventsTable() {
     const events = await fetchEventsList()
+    let eventsList = new Array(events.length)
+    let criticalCount = 0, warningCount = 0
 
-    const eventsList = events.map(event =>
-    ({
-        ...event,
-        icon: event.event_type === 'fire' ? Flame : event.event_type === 'weapon' ? AlertTriangle : event.event_type === 'loitering' ? Clock : CctvOff,
-        styles: event.severity === 'critical' ? eventStyles['critical'] : event.severity === 'info' ? eventStyles['info'] : eventStyles['warning']
-    }))
+    events.forEach((event, index) => {
+        if (event.severity === 'critical') criticalCount++
+        else if (event.severity === 'warning') warningCount++
 
-    const criticalCount = events.filter(event => event.severity === "critical").length
-    const warningCount = events.filter(event => event.severity === "warning").length
+        eventsList[index] = {
+            ...event,
+            icon: event.event_type === 'fire' ? Flame : event.event_type === 'weapon' ? AlertTriangle : event.event_type === 'loitering' ? Clock : event.event_type === 'watchlist_face' ? ScanFace : event.event_type === 'watchlist_plate' ? ScanSquare : CctvOff,
+            styles: event.severity === 'critical' ? eventStyles['critical'] : event.severity === 'info' ? eventStyles['info'] : eventStyles['warning']
+        }
+    }
+    )
 
     return (
         <Card>
@@ -72,7 +76,7 @@ export default async function EventsTable() {
                             </div>
 
                             <div className="min-w-0 flex-1">
-                                <div className="truncate text-sm font-semibold text-zinc-100">
+                                <div className="text-sm font-semibold text-zinc-100">
                                     {event.message}
                                 </div>
 
