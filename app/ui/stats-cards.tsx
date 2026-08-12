@@ -1,10 +1,17 @@
 import { Card, CardDescription, CardHeader, CardTitle, } from "@/components/ui/card"
-import { fetchTotalKPIs } from "@/lib/data"
 import { Car, Cctv, ShieldAlert, Users } from "lucide-react"
 
-export default async function StatsCards() {
-    const statsData = await fetchTotalKPIs()
+type Props = {
+    people_today: number;
+    male_today: number;
+    female_today: number;
+    vehicles_today: number;
+    cameras_online: number;
+    cameras_total: number;
+    critical_alerts_open: number;
+}
 
+export default function StatsCards({ people_today, male_today, female_today, vehicles_today, cameras_online, cameras_total, critical_alerts_open }: Props) {
     return (
         <div className="grid grid-cols-2 gap-4 lg:grid-cols-5">
             <Card>
@@ -13,7 +20,7 @@ export default async function StatsCards() {
                         <Users />
                         <p>People today</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">{statsData.people_today}</CardTitle>
+                    <CardTitle className="text-2xl">{people_today}</CardTitle>
                 </CardHeader>
             </Card>
 
@@ -22,7 +29,7 @@ export default async function StatsCards() {
                     <CardDescription className="text-lg">
                         <p>Male / female</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">{`${statsData.male_today} / ${statsData.female_today}`}</CardTitle>
+                    <CardTitle className="text-2xl">{`${male_today} / ${female_today}`}</CardTitle>
                 </CardHeader>
             </Card>
 
@@ -32,7 +39,7 @@ export default async function StatsCards() {
                         <Car />
                         <p>Vehicles today</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">{statsData.vehicles_today}</CardTitle>
+                    <CardTitle className="text-2xl">{vehicles_today}</CardTitle>
                 </CardHeader>
             </Card>
 
@@ -42,7 +49,7 @@ export default async function StatsCards() {
                         <Cctv />
                         <p>Cameras online</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">{`${statsData.cameras_online} / ${statsData.cameras_total}`}</CardTitle>
+                    <CardTitle className="text-2xl">{`${cameras_online} / ${cameras_total}`}</CardTitle>
                 </CardHeader>
             </Card>
 
@@ -52,7 +59,7 @@ export default async function StatsCards() {
                         <ShieldAlert />
                         <p>Critical alerts</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">{statsData.critical_alerts_open}</CardTitle>
+                    <CardTitle className="text-2xl">{critical_alerts_open}</CardTitle>
                 </CardHeader>
             </Card>
         </div>

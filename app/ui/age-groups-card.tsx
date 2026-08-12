@@ -1,10 +1,16 @@
 import { Card, CardContent, CardDescription, CardHeader } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { fetchTotalAgeDistribution } from "@/lib/data";
 
-export default async function AgeGroupsCard() {
-    const ageDistributionData = await fetchTotalAgeDistribution()
+type AgeDistribution = {
+    label: string;
+    value: number;
+}
 
+interface Props {
+    ageDistributionData: AgeDistribution[];
+}
+
+export default function AgeGroupsCard({ ageDistributionData }: Props) {
     return (
         <Card>
             <CardHeader className="pb-3">
