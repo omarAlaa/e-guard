@@ -1,31 +1,25 @@
-import { ChevronRight, Funnel } from "lucide-react";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
-import { fetchCamerasOverview } from "@/lib/data";
 import { formatTime } from "@/lib/utils";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import Search from "./search";
+import { CamerasOverview } from "@/lib/definitions";
+import CamerasFilter from "./cameras-filter";
 
-export default async function CameraList() {
-    const camerasData = await fetchCamerasOverview()
+type Props = {
+    camerasData: CamerasOverview[];
+}
 
+export default function CameraList({ camerasData }: Props) {
     return (
         <div>
             <div className="flex gap-3">
-                <Input
-                    placeholder="Search cameras"
-                    className="bg-zinc-900 border-zinc-700"
-                />
+                <Search />
 
-                <Button
-                    size="icon"
-                    variant="outline"
-                    className="border-zinc-700 bg-zinc-900"
-                >
-                    <Funnel className="h-4 w-4" />
-                </Button>
+                <CamerasFilter />
             </div>
 
-            <div className="mt-6 max-h-100 space-y-2 overflow-y-auto pr-2">
+            <ScrollArea className="mt-2 h-100 pr-3">
                 {camerasData.map((camera) => (
                     <Link
                         key={camera.id}
@@ -60,7 +54,7 @@ export default async function CameraList() {
                         <ChevronRight className="h-5 w-5 text-zinc-500 group-hover:text-white transition" />
                     </Link>
                 ))}
-            </div>
+            </ScrollArea>
         </div>
     );
 }

@@ -40,6 +40,8 @@ export type AlarmsFeed = {
 export type CamerasOverview = {
     id: string;
     name: string;
+    latitude: number;
+    longitude: number;
     status: string;
     latest_people_count: number;
     latest_vehicle_count: number;

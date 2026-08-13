@@ -52,17 +52,23 @@ export async function fetchAlarmsFeed() {
     }
 }
 
-export async function fetchCamerasOverview() {
+export async function fetchCamerasOverview(query: string, statuses = ['online', 'offline']) {
     try {
         const data = await sql<CamerasOverview[]>`
         SELECT
           id,
           name,
+          latitude,
+          longitude,
           status,
           latest_people_count,
           latest_vehicle_count,
           last_seen_at
-        FROM v_cameras_overview`;
+        FROM v_cameras_overview
+        WHERE
+          name ILIKE ${`%${query}%`} AND
+          status = any(${statuses})
+        `;
 
         return data;
     } catch (error) {
