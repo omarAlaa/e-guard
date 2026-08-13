@@ -4,8 +4,13 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow, } from "
 import { fetchPlateRecFeed } from "@/lib/data"
 import { formatTime } from "@/lib/utils"
 
-export default async function PlateRecTable() {
-    const plateRecData = await fetchPlateRecFeed()
+type Props = {
+    query: string;
+    camera: string;
+}
+
+export default async function PlateRecTable({ query, camera }: Props) {
+    const plateRecData = await fetchPlateRecFeed(query, camera)
 
     return (
         <Card className="mt-8">

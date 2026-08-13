@@ -162,7 +162,7 @@ export async function fetchFaceRecFeed(query: string, camera: string) {
     }
 }
 
-export async function fetchPlateRecFeed() {
+export async function fetchPlateRecFeed(query: string, camera: string) {
     try {
         const plateRecFeed = await sql<PlateMatchRecord[]>`
         SELECT
@@ -174,6 +174,11 @@ export async function fetchPlateRecFeed() {
           camera_name,
           status
         FROM v_plate_recognition_feed
+        WHERE plate_number ILIKE ${`%${query}%`}
+            ${camera !== ''
+                ? sql`AND camera_name = ${camera}`
+                : sql``
+            }
           `;
 
         return plateRecFeed;
