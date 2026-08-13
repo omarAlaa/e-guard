@@ -2,51 +2,13 @@ import { Badge } from "@/components/ui/badge";
 import { fetchFaceRecFeed } from "@/lib/data";
 import { formatTime } from "@/lib/utils";
 
-// const people = [
-//     {
-//         id: 1,
-//         initials: "JD",
-//         name: "John Doe",
-//         location: "Gate 1",
-//         time: "2m ago",
-//         match: null,
-//         watchlist: true,
-//         avatarClass: "bg-red-950 text-red-400",
-//     },
-//     {
-//         id: 2,
-//         initials: "MR",
-//         name: "Maria Reyes",
-//         location: "Lobby",
-//         time: "8m ago",
-//         match: 96,
-//         watchlist: false,
-//         avatarClass: "bg-blue-950 text-blue-400",
-//     },
-//     {
-//         id: 3,
-//         initials: "?",
-//         name: "Unidentified",
-//         location: "Dock",
-//         time: "15m ago",
-//         match: null,
-//         watchlist: false,
-//         avatarClass: "bg-zinc-800 text-zinc-400",
-//     },
-//     {
-//         id: 4,
-//         initials: "TK",
-//         name: "Tom Klein",
-//         location: "Gate 1",
-//         time: "11m ago",
-//         match: 91,
-//         watchlist: false,
-//         avatarClass: "bg-blue-950 text-blue-400",
-//     },
-// ];
+type Props = {
+    query: string;
+    camera: string;
+}
 
-export default async function PeopleMatches() {
-    const faceRecFeed = await fetchFaceRecFeed()
+export default async function PeopleMatches({ query, camera }: Props) {
+    const faceRecFeed = await fetchFaceRecFeed(query, camera)
 
     return (
         <div className="mt-8 grid grid-cols-2 gap-x-6 gap-y-8 sm:grid-cols-3 lg:grid-cols-4">

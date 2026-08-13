@@ -14,7 +14,7 @@ export default function CameraList({ camerasData }: Props) {
     return (
         <div>
             <div className="flex gap-3">
-                <Search />
+                <Search placeholder="Search cameras" />
 
                 <CamerasFilter />
             </div>

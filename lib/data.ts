@@ -137,23 +137,28 @@ export async function fetchCameras() {
     }
 }
 
-export async function fetchFaceRecFeed() {
+export async function fetchFaceRecFeed(query: string, camera: string) {
     try {
         const faceRecFeed = await sql<FaceMatchRecord[]>`
-        SELECT
-          id,
-          matched_at,
-          person_name,
-          confidence,
-          is_watchlisted,
-          camera_name
-        FROM v_face_recognition_feed
-          `;
+            SELECT
+                id,
+                matched_at,
+                person_name,
+                confidence,
+                is_watchlisted,
+                camera_name
+            FROM v_face_recognition_feed
+            WHERE person_name ILIKE ${`%${query}%`}
+            ${camera !== ''
+                ? sql`AND camera_name = ${camera}`
+                : sql``
+            }
+        `;
 
         return faceRecFeed;
     } catch (error) {
-        console.error('Database Error:', error);
-        throw new Error('Failed to fetch face recognition data.');
+        console.error("Database Error:", error);
+        throw new Error("Failed to fetch face recognition data.");
     }
 }
 

@@ -5,7 +5,11 @@ import { useSearchParams, usePathname, useRouter } from 'next/navigation';
 import { useState } from "react";
 import { useDebouncedCallback } from 'use-debounce';
 
-export default function Search() {
+type Props = {
+    placeholder?: string;
+}
+
+export default function Search({ placeholder }: Props) {
     const searchParams = useSearchParams()
     const pathName = usePathname()
     const { replace } = useRouter()
@@ -26,7 +30,7 @@ export default function Search() {
     return (
         <Input
             value={term}
-            placeholder="Search cameras"
+            placeholder={placeholder}
             onChange={(e) => {
                 setTerm(e.target.value)
                 handleSearch(e.target.value)
