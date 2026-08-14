@@ -21,7 +21,7 @@ export default function SiteMap({ camerasData }: Props) {
                 Site map
             </h3>
 
-            <div className="relative h-90 rounded-xl border border-zinc-700 bg-zinc-950 p-4">
+            <div className="relative rounded-xl border border-zinc-700 bg-zinc-950 p-4">
                 <Map camerasData={camerasData} />
             </div>
 

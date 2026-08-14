@@ -1,3 +1,5 @@
+import 'server-only';
+
 import postgres from 'postgres';
 import { AlarmsFeed, Camera, CameraAlarm, CamerasOverview, CameraStats, Event, FaceMatchRecord, HourlyTraffic, PlateMatchRecord, TotalKPIs } from './definitions';
 
@@ -81,7 +83,10 @@ export async function fetchCameraStats(id: string) {
     try {
         const cameraStats = await sql<CameraStats[]>`
         SELECT
+          camera_id as id,
           name,
+          latitude,
+          longitude,
           status,
           last_seen_at,
           people_now,
@@ -91,7 +96,7 @@ export async function fetchCameraStats(id: string) {
           alerts_today
         FROM v_camera_stats_24h
         WHERE camera_id = ${id}
-         `;
+        `;
 
         return cameraStats[0];
     } catch (error) {
@@ -100,17 +105,42 @@ export async function fetchCameraStats(id: string) {
     }
 }
 
+export async function fetchCameraOccupancy(id: string) {
+    try {
+        const data = await sql<HourlyTraffic[]>`
+        SELECT
+          date_trunc('hour', recorded_at) as hour_bucket,
+          sum(total_count) as people_count
+        FROM people_counts
+        WHERE camera_id = ${id}
+        group by 1
+        order by hour_bucket
+        `;
+
+        return data;
+    } catch (error) {
+        console.error('Database Error:', error);
+        throw new Error('Failed to fetch camera occupancy data.');
+    }
+}
+
 export async function fetchCameraAlarms(id: string) {
     try {
         const cameraAlarms = await sql<CameraAlarm[]>`
         SELECT
-          id,
           detected_at,
           detection_type,
           confidence,
           status
         FROM fire_weapon_detections
         WHERE camera_id = ${id}
+        union all
+ select matched_at, 'Face: ' || person_name, confidence, case when is_watchlisted then 'watchlisted' else 'reviewed' end
+ from face_matches where camera_id =${id}
+  union all
+ select read_at, 'Plate: ' || plate_number, confidence, status
+from plate_reads where camera_id = ${id}
+order by detected_at desc
           `;
 
         return cameraAlarms;

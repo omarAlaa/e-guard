@@ -2,10 +2,10 @@
 
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { DivIcon } from "leaflet";
-import { CamerasOverview } from "@/lib/definitions";
+import { CamerasOverview, CameraStats } from "@/lib/definitions";
 
 type Props = {
-    camerasData: CamerasOverview[];
+    camerasData: CamerasOverview[] | CameraStats[];
 };
 
 const createMarkerIcon = (status: CamerasOverview["status"]) => {
@@ -29,7 +29,7 @@ export default function Map({ camerasData }: Props) {
         <MapContainer
             center={[30.070999, 31.357915]}
             zoom={16}
-            className="h-full w-full"
+            className="h-88 w-full"
         >
             <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

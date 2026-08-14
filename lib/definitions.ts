@@ -49,7 +49,10 @@ export type CamerasOverview = {
 }
 
 export type CameraStats = {
+    id: string;
     name: string;
+    latitude: number;
+    longitude: number;
     status: string;
     last_seen_at: string;
     people_now: string;
