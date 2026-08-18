@@ -5,6 +5,7 @@ import { AuthError } from 'next-auth';
 import postgres from "postgres";
 import { z } from 'zod';
 import bcrypt from 'bcrypt';
+import { revalidatePath } from "next/cache";
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: require });
 
@@ -83,4 +84,23 @@ export async function signUp(
     }
 
     return { success: true };
+}
+
+export async function changeAlertStatus(alertId: string, status: string) {
+    console.log(alertId, status);
+
+    try {
+        await sql`
+        UPDATE alerts
+        SET status = ${status}
+        WHERE id = ${alertId}
+    `;
+
+    } catch (error) {
+        return {
+            message: 'Database Error: Failed to Update alert status.',
+        }
+    }
+
+    revalidatePath("/alerts");
 }
