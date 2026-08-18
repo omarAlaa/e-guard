@@ -84,6 +84,15 @@ export type FaceMatchRecord = {
     camera_name: string;
 }
 
+export type PerosnHisotryLog = {
+    id: string;
+    matched_at: string;
+    person_name: string;
+    is_watchlisted: boolean;
+    camera_name: string;
+    location: string;
+}
+
 export type PlateMatchRecord = {
     id: string;
     read_at: string;

@@ -1,7 +1,7 @@
 import 'server-only';
 
 import postgres from 'postgres';
-import { AlarmsFeed, Camera, CameraAlarm, CamerasOverview, CameraStats, Event, FaceMatchRecord, HourlyTraffic, PlateMatchRecord, TotalKPIs } from './definitions';
+import { AlarmsFeed, Camera, CameraAlarm, CamerasOverview, CameraStats, Event, FaceMatchRecord, HourlyTraffic, PerosnHisotryLog, PlateMatchRecord, TotalKPIs } from './definitions';
 
 const sql = postgres(process.env.POSTGRES_URL!, { ssl: 'require' });
 
@@ -189,6 +189,24 @@ export async function fetchFaceRecFeed(query: string, camera: string) {
     } catch (error) {
         console.error("Database Error:", error);
         throw new Error("Failed to fetch face recognition data.");
+    }
+}
+
+export async function fetchPersonHistory(personName: string) {
+    try {
+        const personHistory = await sql<PerosnHisotryLog[]>`
+            SELECT
+              fm.id, fm.matched_at, fm.is_watchlisted, c.name as camera_name, c.location
+            FROM face_matches fm
+            JOIN cameras c on c.id = fm.camera_id
+            WHERE fm.person_name = ${personName}
+            ORDER BY fm.matched_at desc;
+        `;
+
+        return personHistory;
+    } catch (error) {
+        console.error("Database Error:", error);
+        throw new Error("Failed to fetch person history.");
     }
 }
 
