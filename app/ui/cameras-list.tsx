@@ -23,7 +23,7 @@ export default function CameraList({ camerasData }: Props) {
                 {camerasData.map((camera) => (
                     <Link
                         key={camera.id}
-                        className="p-2 group flex w-full items-center justify-between rounded-lg hover:bg-zinc-800"
+                        className="p-2 group flex w-full items-center justify-between rounded-lg hover:bg-zinc-300 dark:hover:bg-zinc-800"
                         href={`cameras/${camera.id}`}
                     >
                         <div className="flex items-center gap-3">
@@ -35,7 +35,7 @@ export default function CameraList({ camerasData }: Props) {
                             />
 
                             <div className="text-left justify-center">
-                                <p className="font-semibold text-white">
+                                <p className="font-semibold text-zinc-500 dark:text-zinc-300">
                                     {camera.name}
                                 </p>
 

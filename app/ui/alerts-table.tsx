@@ -34,7 +34,7 @@ export default async function AlertsTable() {
                                     {alarm.detection_type === 'fire' ?
                                         <Badge variant="destructive">Fire</Badge>
                                         :
-                                        <Badge className="bg-yellow-50 text-yellow-700 dark:bg-yellow-950 dark:text-yellow-500">Weapon</Badge>}
+                                        <Badge className="bg-yellow-200 text-yellow-700 dark:bg-yellow-950 dark:text-yellow-500">Weapon</Badge>}
                                 </TableCell>
                                 <TableCell>{`${Math.round(alarm.confidence)}%`}</TableCell>
                                 <TableCell className={alarm.status === 'unreviewed' ? "text-destructive" : ''}>{alarm.status}</TableCell>

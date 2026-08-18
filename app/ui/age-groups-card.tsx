@@ -25,14 +25,14 @@ export default function AgeGroupsCard({ ageDistributionData }: Props) {
                         key={group.label}
                         className="grid grid-cols-[42px_1fr_38px] items-center gap-3"
                     >
-                        <span className="text-sm text-zinc-300">{group.label}</span>
+                        <span className="text-sm text-zinc-500 dark:text-zinc-300">{group.label}</span>
 
                         <Progress
                             value={group.value}
-                            className="bg-zinc-800"
+                            className=""
                         />
 
-                        <span className="text-right text-sm font-medium text-zinc-200">
+                        <span className="text-right text-sm font-medium text-zinc-500 dark:text-zinc-300">
                             {group.value}%
                         </span>
                     </div>

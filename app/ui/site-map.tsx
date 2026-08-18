@@ -17,7 +17,7 @@ type Props = {
 export default function SiteMap({ camerasData }: Props) {
     return (
         <div>
-            <h3 className="mb-4 text-sm font-semibold text-zinc-300">
+            <h3 className="mb-4 text-sm font-semibold text-zinc-500 dark:text-zinc-300">
                 Site map
             </h3>
 
@@ -25,15 +25,15 @@ export default function SiteMap({ camerasData }: Props) {
                 <Map camerasData={camerasData} />
             </div>
 
-            <div className="mt-5 flex gap-6 text-sm">
+            <div className="mt-5 flex gap-6 text-sm text-zinc-500 dark:text-zinc-300">
                 <div className="flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-emerald-500" />
-                    <span className="text-zinc-400">Online</span>
+                    <span>Online</span>
                 </div>
 
                 <div className="flex items-center gap-2">
                     <span className="h-2.5 w-2.5 rounded-full bg-red-500" />
-                    <span className="text-zinc-400">Offline</span>
+                    <span>Offline</span>
                 </div>
             </div>
         </div>

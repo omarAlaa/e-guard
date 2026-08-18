@@ -58,18 +58,18 @@ export default function CameraLiveFeed({ cameraStats }: Props) {
                 {
                     cameraStats.status === 'online' &&
                     <div>
-                        <Badge className="mb-4 bg-red-900 text-red-300 hover:bg-red-900">
+                        <Badge className="mb-4" variant='destructive'>
                             Live
                         </Badge>
 
-                        <div className="relative flex aspect-video items-center justify-center rounded-xl border border-zinc-800 bg-black">
+                        <div className="relative flex aspect-video items-center justify-center rounded-xl bg-black">
                             <iframe src="https://www.youtube.com/embed/19g66ezsKAg" allowFullScreen className="w-full h-full" />
                         </div>
                     </div>
                 }
 
                 <div className="h-98">
-                    <h3 className="mb-5 text-sm font-semibold text-zinc-300">
+                    <h3 className="mb-5 text-sm font-semibold text-zinc-500 dark:text-zinc-300">
                         Location
                     </h3>
 

@@ -44,13 +44,13 @@ export default function CameraStatsCards({ people_now, male_pct, female_pct, pea
                 </CardHeader>
             </Card>
 
-            <Card className="bg-red-950">
+            <Card className="bg-red-800">
                 <CardHeader>
-                    <CardDescription className="flex flex-row gap-2 text-lg">
+                    <CardDescription className="flex flex-row gap-2 text-lg text-white">
                         <ShieldAlert />
                         <p>Alerts today</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">{alerts_today}</CardTitle>
+                    <CardTitle className="text-2xl text-white">{alerts_today}</CardTitle>
                 </CardHeader>
             </Card>
         </div>

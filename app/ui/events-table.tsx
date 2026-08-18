@@ -21,10 +21,7 @@ export default async function EventsTable() {
                 </CardTitle>
 
                 <div className="flex items-center gap-2">
-                    <Badge
-                        variant="outline"
-                        className="border-0 bg-red-950/80 p-3 text-md text-red-400"
-                    >
+                    <Badge variant='destructive' className="p-3 text-md">
                         {criticalCount} critical
                     </Badge>
 

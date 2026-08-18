@@ -19,12 +19,12 @@ export default async function PeopleVehicleCard() {
                 <div className="flex gap-6 text-sm">
                     <div className="flex items-center gap-2">
                         <span className="h-1 w-3 rounded-full bg-teal-500" />
-                        <span className="text-zinc-300">People</span>
+                        <span className="text-zinc-500 dark:text-zinc-300">People</span>
                     </div>
 
                     <div className="flex items-center gap-2">
                         <span className="h-1 w-3 rounded-full bg-amber-500" />
-                        <span className="text-zinc-300">Vehicles</span>
+                        <span className="text-zinc-500 dark:text-zinc-300">Vehicles</span>
                     </div>
                 </div>
             </CardContent>

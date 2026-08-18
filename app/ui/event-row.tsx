@@ -47,7 +47,7 @@ export default function EventRow({ event }: Props) {
     return (
         <div
             key={formattedEvent.id}
-            className={`flex min-h-[22 items-center gap-3 border-l-[3px] px-3 py-3 ${formattedEvent.styles.border}`}
+            className={`flex min-h-[22 items-center gap-3 border-l-[3px] px-3 py-3 text-zinc-500 dark:text-zinc-300 ${formattedEvent.styles.border}`}
         >
             <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-lg bg-zinc-800">
                 <formattedEvent.icon
@@ -57,12 +57,12 @@ export default function EventRow({ event }: Props) {
             </div>
 
             <div className="min-w-0 flex-1">
-                <div className="text-sm font-semibold text-zinc-100">
+                <div className="text-sm font-semibold">
                     {formattedEvent.message}
                 </div>
 
-                <div className="text-xs text-zinc-400">
-                    <span className="font-medium text-zinc-300">
+                <div className="text-xs">
+                    <span className="font-medium">
                         {formatTime(formattedEvent.occurred_at)}
                     </span>
 
@@ -70,14 +70,14 @@ export default function EventRow({ event }: Props) {
 
                     {formattedEvent.event_type !== 'camera_offline' ?
                         <>
-                            <span className="font-medium text-zinc-300">{Math.round(formattedEvent.confidence)}% confidence</span>
+                            <span className="font-medium">{Math.round(formattedEvent.confidence)}% confidence</span>
 
                             <span> · </span>
 
-                            <span className="font-medium text-zinc-300">{formattedEvent.status}</span>
+                            <span className="font-medium">{formattedEvent.status}</span>
                         </>
                         :
-                        <span className="font-medium text-zinc-300">system event</span>
+                        <span className="font-medium">system event</span>
                     }
                 </div>
             </div>
@@ -89,7 +89,7 @@ export default function EventRow({ event }: Props) {
                             <Button
                                 variant="outline"
                                 size="sm"
-                                className="h-8 border-zinc-700 bg-transparent px-3 text-xs font-medium text-zinc-200 hover:bg-zinc-800 hover:text-white"
+                                className="h-8 border-zinc-700 bg-transparent px-3 text-xs font-medium hover:bg-zinc-800 hover:text-white"
                             />
                         }
                     >
@@ -115,7 +115,7 @@ export default function EventRow({ event }: Props) {
                     <Button
                         variant="outline"
                         size="sm"
-                        className="h-8 border-zinc-700 bg-transparent px-3 text-xs font-medium text-zinc-200 hover:bg-zinc-800 hover:text-white"
+                        className="h-8 border-zinc-700 bg-transparent px-3 text-xs font-medium hover:bg-zinc-800 hover:text-white"
                         onClick={handleChangeStatus}
                     >
                         {event.status === 'reviewed' ? 'Esclate' : 'Acknowledge'} {loading && <Spinner />}

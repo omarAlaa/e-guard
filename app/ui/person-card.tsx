@@ -38,11 +38,11 @@ export default function PersonCard({ person }: Props) {
                 {person.person_name === 'Unidentified' ? '?' : person.person_name.trim().split(/\s+/).map(w => w[0].toUpperCase()).join('')}
             </div>
 
-            <p className="mt-2.5 text-sm font-semibold text-zinc-100">
+            <p className="mt-2.5 text-sm font-semibold text-zinc-500 dark:text-zinc-300">
                 {person.person_name}
             </p>
 
-            <p className="text-xs text-zinc-400">
+            <p className="text-xs text-zinc-500 dark:text-zinc-300">
                 {person.camera_name} · {formatTime(person.matched_at)}
             </p>
 
@@ -55,11 +55,11 @@ export default function PersonCard({ person }: Props) {
                         Watchlist
                     </Badge>
                 ) : person.person_name !== 'Unidentified' ? (
-                    <span className="text-xs text-zinc-300">
+                    <span className="text-xs text-zinc-500 dark:text-zinc-300">
                         {Math.round(person.confidence)}% match
                     </span>
                 ) : (
-                    <span className="text-xs text-zinc-400">No match</span>
+                    <span className="text-xs text-zinc-500 dark:text-zinc-300">No match</span>
                 )}
             </div>
         </div>

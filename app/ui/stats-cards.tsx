@@ -53,13 +53,13 @@ export default function StatsCards({ people_today, male_today, female_today, veh
                 </CardHeader>
             </Card>
 
-            <Card className="bg-red-950">
+            <Card className="bg-red-800">
                 <CardHeader>
-                    <CardDescription className="flex flex-row gap-2 text-lg">
+                    <CardDescription className="flex flex-row gap-2 text-lg text-white">
                         <ShieldAlert />
                         <p>Critical alerts</p>
                     </CardDescription>
-                    <CardTitle className="text-2xl">{critical_alerts_open}</CardTitle>
+                    <CardTitle className="text-2xl text-white">{critical_alerts_open}</CardTitle>
                 </CardHeader>
             </Card>
         </div>

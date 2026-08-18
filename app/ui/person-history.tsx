@@ -16,11 +16,11 @@ export default async function PersonHistory({ person }: Props) {
                 </div>
 
                 <div>
-                    <p className="text-sm font-semibold text-zinc-100">
+                    <p className="text-sm font-semibold text-zinc-500 dark:text-zinc-300">
                         {person} — appearance history
                     </p>
 
-                    {personHistory[0].is_watchlisted && <p className="text-xs text-zinc-400">
+                    {personHistory[0].is_watchlisted && <p className="text-xs text-zinc-500 dark:text-zinc-300">
                         Flagged on watchlist
                     </p>}
                 </div>
@@ -32,13 +32,13 @@ export default async function PersonHistory({ person }: Props) {
                 {personHistory.map((appearance) => (
                     <div
                         key={appearance.id}
-                        className="grid grid-cols-[82px_1fr] items-center border-b border-zinc-800 py-2"
+                        className="grid grid-cols-[82px_1fr] items-center border-b border-zinc-800 py-2 text-zinc-500 dark:text-zinc-300"
                     >
-                        <span className="text-xs text-zinc-500">
+                        <span className="text-xs">
                             {formatTime(appearance.matched_at)}
                         </span>
 
-                        <span className="text-sm font-semibold text-zinc-200">
+                        <span className="text-sm font-semibold">
                             {`${appearance.camera_name} — ${appearance.location}`}
                         </span>
                     </div>
