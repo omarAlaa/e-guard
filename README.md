@@ -22,3 +22,6 @@ Built solo as a portfolio project — frontend, database schema, and query layer
 | Styling    | Tailwind CSS, shadcn/ui |
 | Database   | PostgreSQL (Neon serverless) |
 | Data layer | Server components + server actions (no client-side API routes for internal data) |
+
+## Test account
+username: test@email.com, password: 12345678, or you can create new account.
