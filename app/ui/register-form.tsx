@@ -34,7 +34,7 @@ export default function RegisterForm() {
                 description: "Your account has been created.",
             })
 
-            router.push('/login');
+            router.push('/');
         }
         else if (state.errors) {
             toast.add({
@@ -54,7 +54,7 @@ export default function RegisterForm() {
                         Enter your email and password to create new account
                     </CardDescription>
                     <CardAction>
-                        <Link href='login'>
+                        <Link href='/'>
                             <Button variant="link">Login</Button>
                         </Link>
                     </CardAction>
